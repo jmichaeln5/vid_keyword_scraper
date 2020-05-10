@@ -1,4 +1,4 @@
-<p id="notice"><%= notice %></p>
+<!-- <p id="notice"><%= notice %></p>
 
 <p>
   <strong>Link:</strong>
@@ -16,4 +16,93 @@
 </p>
 
 <%= link_to 'Edit', edit_site_path(@site) %> |
-<%= link_to 'Back', sites_path %>
+<%= link_to 'Back', sites_path %> -->
+
+
+
+<!-- <font style="color:green;">
+  <p id="notice"><%= notice %></p>
+</font> -->
+
+<h1> Page </h1>
+
+<% if @site.title.blank? && @official_title.blank? %>
+  <h5>
+      Title: <a href="<%= @site.link %>" target="_blank">
+        No Title Availble
+      </a>
+  </h5>
+<% elsif @official_title.blank?  %>
+    <h5>
+        Title: <a href="<%= @site.link %>" target="_blank">
+          <%= "#{@site.title}"%>
+        </a>
+    </h5>
+<% elsif @site.title.blank?  %>
+    <h5>
+        Title: <a href="<%= @site.link %>" target="_blank">
+          <%= "#{@official_title}"%>
+        </a>
+    </h5>
+<% else %>
+    <h5>
+        Title: <a href="<%= @site.link %>" target="_blank">
+          No Title Availble
+        </a>
+    </h5>
+<% end %>
+
+<h6>
+  <p>
+    <strong>Link:</strong>
+    <a href="<%= @site.link %>" target="_blank"> <%= @site.link %></a>
+  </p>
+</h6>
+
+<hr>
+
+<% if @site.keyword.empty? != true %>
+  <h6>
+    <p>
+      <strong>Selected Element:</strong>
+      <%= @site.keyword %>
+      <br>
+
+      <strong>Number of Element Results:</strong>
+      <%= @keyword_results.to_a.count %>
+
+      <br>
+      <br>
+
+      <%= link_to 'Edit Selected Element', edit_site_path(@site), class:"btn btn-outline-secondary" %>
+
+      <br>
+      <hr>
+
+      <% if @keyword_results.to_a.count < 1 %>
+        <h1>
+          <font style="color:red;">  The <%= @site.keyword %> keyword is not used on your Webpage </font>
+        </h1>
+      <% else  %>
+
+        <% keyword_counter = 0 %>
+        <% length = @keyword_results.length.to_i %>
+
+        <% @keyword_results.each do |keyword| %>
+          <strong> Element Result: <%= keyword_counter += 1%> </strong>
+
+          <br>
+
+          <%= keyword %>
+
+          <hr>
+
+        <% end %>
+      <% end  %>
+    </p>
+  </h6>
+<% end %>
+
+<br>
+
+<%= link_to "Back", :back, class:"btn btn-outline-primary"%>

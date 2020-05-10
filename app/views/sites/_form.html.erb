@@ -11,22 +11,32 @@
     </div>
   <% end %>
 
+
   <div class="field">
     <%= form.label :link %>
-    <%= form.text_field :link %>
+    <%= form.text_field :link, id: :site_link %>
   </div>
 
   <div class="field">
-    <%= form.label :title %>
-    <%= form.text_field :title %>
+    <%= form.label :keyword, "Select Element/Keyword:" %>
+    <%= form.select :keyword, [ 'html', 'header', 'head','style', 'article', 'section', 'hgroup', 'title', 'footer',  'meta', 'link', 'nav', 'body', 'script',  'var', 'source', 'div', 'p', 'table', 'tbody', 'thead', 'tr', 'td', 'th', 'form', 'table', 'label', 'select', 'option', 'a', 'ul', 'li', 'ol',  'img','h1', 'h2', 'h3', 'h4', 'h5', 'h6',  'br', 'hr',  'blockquote', 'main'].sort, id: :site_keyword %> keyword
   </div>
 
-  <div class="field">
-    <%= form.label :keyword %>
-    <%= form.text_field :keyword %>
-  </div>
+  <hr>
+    <h4>Optional Title </h4>
+    <div class="field">
+      <%= form.label :title, 'Your Title:' %>
+      <%= form.text_field :title, id: :site_title %>
+    </div>
+  <hr>
+
+  <br>
+  <br>
 
   <div class="actions">
     <%= form.submit %>
   </div>
 <% end %>
+
+<br>
+<br>

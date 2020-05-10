@@ -15,6 +15,9 @@
 
         <!-- <%#=link_to 'Add Site', new_user_site_path(current_user), class:"nav-item nav-link"  %> -->
 
+        <%=link_to 'Sites', sites_path, class:"nav-item nav-link"  %>
+
+
         <%= link_to 'Logout', destroy_user_session_path, method: :delete, class:"nav-item nav-link" %>
 
       <% else  %>

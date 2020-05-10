@@ -1,20 +1,84 @@
 class SitesController < ApplicationController
   before_action :set_site, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!
+
+  ### Error page, redirected to when Server Error
+  def error
+      @user = current_user
+      @sites = Site.all
+      # @sites = Site.where(user_id: @user).order("created_at ASC")
+  end
 
   # GET /sites
   # GET /sites.json
   def index
+
+    @user = current_user
     @sites = Site.all
+
+    # @sites = Site.where(user_id: @user).order("created_at DESC")
+
+    ### Necessary to require for Heroku for view or WILL error out
+    require 'rubygems'
+    require 'nokogiri'
+    require 'open-uri'
+
+    begin
+      @sites.each do |site|
+
+        @site_link = site.link.to_s
+
+        if @site_link.exclude? "http"
+            redirect_to error_path and return
+        end
+
+        @site_open = Nokogiri::HTML(open(@site_link))
+        @official_title = @site_open.at_css("title").text
+
+        ### Rescues from OpenURI HTTPError(s)
+        rescue OpenURI::HTTPError
+          ###(Specifically wrote rescue block from begin for 900 Server error when trying to scrape LinkedIn Profiles)
+        redirect_to error_path and return
+      end
+    end
   end
 
   # GET /sites/1
   # GET /sites/1.json
   def show
+    ### Necessary to require for Heroku for view or WILL error out
+    require 'rubygems'
+    require 'nokogiri'
+    require 'open-uri'
+
+    @user = current_user
+    @site = Site.find(params[:id])
+    @site_link = @site.link.to_s
+
+    if @site_link.exclude? "http"
+        redirect_to error_path and return
+    end
+
+    begin
+      # @site_link = @site.link.to_s
+      @site_keyword = @site.keyword
+
+      @html_doc = Nokogiri::HTML(open(@site_link))
+      @official_title = @html_doc.at_css("title").text
+      @keyword_results = @html_doc.search("#{@site.keyword}")
+      ### Rescues from OpenURI HTTPError(s)
+      rescue OpenURI::HTTPError
+
+      redirect_to error_path and return
+    end
   end
 
   # GET /sites/new
   def new
+    @user = current_user
     @site = Site.new
+    # @site = Site.new(site_params)
+    # @site = @user.sites.build
   end
 
   # GET /sites/1/edit
@@ -25,6 +89,7 @@ class SitesController < ApplicationController
   # POST /sites.json
   def create
     @site = Site.new(site_params)
+    # @site = current_user.sites.build(site_params)
 
     respond_to do |format|
       if @site.save
@@ -56,19 +121,20 @@ class SitesController < ApplicationController
   def destroy
     @site.destroy
     respond_to do |format|
-      format.html { redirect_to sites_url, notice: 'Site was successfully destroyed.' }
+      format.html { redirect_to sites_url, notice: 'Site was successfully removed.' }
       format.json { head :no_content }
     end
   end
 
   private
+
     # Use callbacks to share common setup or constraints between actions.
     def set_site
       @site = Site.find(params[:id])
     end
 
-    # Only allow a list of trusted parameters through.
+    # Never trust parameters from the scary internet, only allow the white list through.
     def site_params
-      params.require(:site).permit(:link, :title, :keyword)
+      params.require(:site).permit(:link, :title, :keyword, :user_id)
     end
 end
