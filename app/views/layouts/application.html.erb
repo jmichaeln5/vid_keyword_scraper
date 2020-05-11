@@ -20,11 +20,13 @@
 
   </head>
 
-  <body>
+  <body class="bg-red-100">
 
     <%= render "layouts/nav" %>
 
-    <div class="container mx-auto px-20 pt-20 text-gray-850 text-base">
+    <div class="bg-white container mx-auto px-20 pt-20 text-gray-850 text-base mt-12">
+
+      <div class="mb-12 h-screen">
 
       <p class="text-green-600 transition duration-500 ease-out"><%= notice %></p>
       <p class="text-red-600"><%= alert %></p>
@@ -32,6 +34,7 @@
       <%= yield %>
 
     </div>
+  </div>
 
   </body>
 </html>

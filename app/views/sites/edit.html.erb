@@ -1,9 +1,53 @@
 <h1>Editing Site</h1>
 
-<%= link_to 'Delete', @site, method: :delete, data: { confirm: 'Are you sure you want to remove this site from your list?' }, class:"btn btn-danger" %>
+
+<%= form_with(model: @site, local: true) do |form| %>
+  <% if @site.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@site.errors.count, "error") %> prohibited this @site from being saved:</h2>
+
+      <ul>
+      <% @site.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
 
 
-<%= render 'form', site: @site %>
 
-<%= link_to 'Show', @site %> |
-<%= link_to 'Back', sites_path %>
+    <% @site_link = @site.link.to_s %>
+    <% @html_doc = Nokogiri::HTML(open(@site_link)) %>
+    <% @official_title = @html_doc.at_css("title").text %>
+    <% @video_id = @site_link.delete_prefix('https://www.youtube.com/watch?v=') %>
+    <% @thumbnail_link = "https://img.youtube.com/vi/#{@video_id}/0.jpg" %>
+
+    <% if @thumbnail_link.present? %>
+    <p>
+      <img src="<%= @thumbnail_link %>" alt="" >
+    </p>
+    <% end %>
+
+  <div class="field">
+    <%= form.label :link %>
+    <%= form.text_field :link, id: :site_link %>
+  </div>
+
+  <hr>
+
+  <br>
+  <br>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+
+  <%= link_to 'Delete', @site, method: :delete, data: { confirm: 'Are you sure you want to remove this site from your list?' }, class:"btn btn-danger" %>
+
+<% end %>
+
+<br>
+<br>
+<br>
+
+  <%= link_to 'Back', sites_path %>

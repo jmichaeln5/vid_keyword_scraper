@@ -14,7 +14,7 @@ class SitesController < ApplicationController
   def index
 
     @user = current_user
-    @sites = Site.all
+    @sites = Site.all.reverse
 
     # @sites = Site.where(user_id: @user).order("created_at DESC")
 
@@ -34,6 +34,8 @@ class SitesController < ApplicationController
 
         @html_doc = Nokogiri::HTML(open(@site_link))
         @official_title = @html_doc.at_css("title").text
+
+        # @keyword_list = @html_doc.at('meta[name="keywords"]').values
 
         ### Rescues from OpenURI HTTPError(s)
         rescue OpenURI::HTTPError
@@ -106,7 +108,8 @@ class SitesController < ApplicationController
 
     respond_to do |format|
       if @site.save
-        format.html { redirect_to @site, notice: 'Site was successfully created.' }
+        # format.html { redirect_to @site, notice: 'Site was successfully created.' }
+        format.html { redirect_to sites_path, notice: 'Site was successfully created.' }
         format.json { render :show, status: :created, location: @site }
       else
         format.html { render :new }

@@ -1,7 +1,25 @@
-<%= link_to 'New Site', new_site_path %>
+
+<div class="container bg-red-400 mx-auto px-24" style="background: linear-gradient(90deg, #ff4b4b 0%, #ed8787 100%)">
+
+  <h2 class="text-6xl font-bold mb-2 text-white pt-10">
+    My Videos.
+  </h2>
+  <h3 class="text-2xl mb-8 text-gray-200">
+    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid corporis fuga, sit, animi consequuntur nesciunt. Non fuga quae, laboriosam explicabo?
+  </h3>
+
+  <button class="">
+    <%= link_to 'Add Video', new_site_path, class:"bg-white font-bold rounded-full py-4 px-8 shadow-lg uppercase tracking-wider" %>
+  </button>
+
+</div>
+
+
 
 <div class="container my-12 mx-auto px-4 md:px-12">
-    <div class="flex flex-wrap -mx-1 lg:-mx-4">
+      <div class="flex items-center justify-center">
+
+      <div class="flex flex-wrap -mx-1 lg:-mx-4">
 
         <% @sites.each do |site| %>
 
@@ -10,13 +28,17 @@
           <% @official_title = @html_doc.at_css("title").text %>
           <% @video_id = @site_link.delete_prefix('https://www.youtube.com/watch?v=') %>
           <% @thumbnail_link = "https://img.youtube.com/vi/#{@video_id}/0.jpg" %>
+          <% @keyword_list = @html_doc.at('meta[name="keywords"]').values %>
 
-            <div class="my-1 px-1 w-full md:w-1/2 lg:my-4 lg:px-4 lg:w-1/3">
-                <article class="overflow-hidden rounded-lg shadow-lg">
+            <div class=" my-1 px-1 w-full md:w-1/2 lg:my-4 lg:px-4 lg:w-1/3">
+                <article class="bg-white overflow-hidden rounded-lg shadow-lg">
+
+
+                  <div>
+                    <img src="<%= @thumbnail_link %>" alt="">
+                  </div>
+
                     <header class="flex items-center justify-between leading-tight p-2 md:p-4">
-                        <div>
-                          <img src="<%= @thumbnail_link %>" alt="">
-                        </div>
                         <h1 class="text-lg">
                               <div class="hover:underline">
                                   <a href="<%= site.link %>" target="_blank">
@@ -25,34 +47,29 @@
                               </div>
                         </h1>
                     </header>
+
+
+                    <div class="p-2">
+                      <strong> Keywords:</strong>
+                      <%= @html_doc.at('meta[name="keywords"]')['content'] %>
+                    </div>
+
                     <footer class="flex items-center justify-between leading-none p-2 md:p-4">
-                      <div class="flex items-center">
-                        <button class="bg-blue-400 hover:bg-blue-700 text-white text-sm p-2 rounded">
-                          <%= link_to 'View', site, class:"" %>
+
+                      <div class="flex ">
+                        <button class="bg-red-400 hover:bg-red-700 text-white text-sm p-2 rounded">
+                          <%= link_to 'Delete', site, method: :delete, data: { confirm: 'Are you sure?' }, class:"hover:underline" %>
                         </button>
                       </div>
 
-                        <!-- <a class="flex items-center" href="#">
-                            <p class="ml-2 text-sm">
-                              <%= link_to 'View', site, class:"hover:underline" %>
-                            </p>
-                        </a>
-
-                        <a class="flex items-center" href="#">
-                            <p class="ml-2 text-sm">
-                                <%= link_to 'Edit', edit_site_path(site), class:"hover:underline" %>
-                            </p>
-                        </a>
-                        <a class="flex items-center" href="#">
-                            <p class="ml-2 text-sm">
-                              <%= link_to 'Delete', site, method: :delete, data: { confirm: 'Are you sure?' }, class:"hover:underline" %>
-                            </p>
-                        </a> -->
-
                     </footer>
+
+
+
                 </article>
             </div>
         <% end %>
 
+      </div>
     </div>
 </div>
