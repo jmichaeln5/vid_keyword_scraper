@@ -21,12 +21,16 @@
   </head>
 
   <body>
+
     <%= render "layouts/nav" %>
 
-    <div class="container mx-auto px-20 pt-20">
-      <p class="notice"><%= notice %></p>
-      <p class="alert"><%= alert %></p>
+    <div class="container mx-auto px-20 pt-20 text-gray-850 text-base">
+
+      <p class="text-green-600"><%= notice %></p>
+      <p class="text-red-600"><%= alert %></p>
+
       <%= yield %>
+
     </div>
 
   </body>
