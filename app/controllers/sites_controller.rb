@@ -18,10 +18,10 @@ class SitesController < ApplicationController
 
     # @sites = Site.where(user_id: @user).order("created_at DESC")
 
-    ### Necessary to require for Heroku for view or WILL error out
-    # require 'rubygems'
-    # require 'nokogiri'
-    # require 'open-uri'
+    ## Necessary to require for Heroku for view or WILL error out
+    require 'rubygems'
+    require 'nokogiri'
+    require 'open-uri'
 
     begin
       @sites.each do |site|
