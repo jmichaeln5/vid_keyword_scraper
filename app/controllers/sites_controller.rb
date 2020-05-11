@@ -16,8 +16,6 @@ class SitesController < ApplicationController
     @user = current_user
     @sites = Site.all.reverse
 
-    # @sites = Site.where(user_id: @user).order("created_at DESC")
-
     ## Necessary to require for Heroku for view or WILL error out
     require 'rubygems'
     require 'nokogiri'
@@ -27,15 +25,12 @@ class SitesController < ApplicationController
       @sites.each do |site|
 
         @site_link = site.link.to_s
-
         if @site_link.exclude? ("http" || "youtube")
             redirect_to error_path and return
         end
 
         @html_doc = Nokogiri::HTML(open(@site_link))
         @official_title = @html_doc.at_css("title").text
-
-        # @keyword_list = @html_doc.at('meta[name="keywords"]').values
 
         ### Rescues from OpenURI HTTPError(s)
         rescue OpenURI::HTTPError
@@ -57,14 +52,10 @@ class SitesController < ApplicationController
     @site = Site.find(params[:id])
     @site_link = @site.link.to_s
 
-
     begin
-
       if @site_link.exclude? ("http" || "youtube")
           redirect_to error_path and return
       end
-
-      # @site_link = @site.link.to_s
 
       @html_doc = Nokogiri::HTML(open(@site_link))
       @official_title = @html_doc.at_css("title").text
@@ -78,14 +69,7 @@ class SitesController < ApplicationController
 
       redirect_to error_path and return
     end
-
-    # byebug
-
   end
-
-
-
-
 
 
   # GET /sites/new
