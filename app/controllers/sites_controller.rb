@@ -12,7 +12,6 @@ class SitesController < ApplicationController
   # GET /sites
   # GET /sites.json
   def index
-
     @user = current_user
     @sites = Site.all.reverse
 
@@ -76,8 +75,6 @@ class SitesController < ApplicationController
   def new
     @user = current_user
     @site = Site.new
-    # @site = Site.new(site_params)
-    # @site = @user.sites.build
   end
 
   # GET /sites/1/edit
