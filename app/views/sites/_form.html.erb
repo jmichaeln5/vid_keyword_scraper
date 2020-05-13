@@ -11,31 +11,24 @@
     </div>
   <% end %>
 
+  <div class="container bg-red-400 mx-auto px-24 rounded-lg" style="background: linear-gradient(90deg, #ff4b4b 0%, #ed8787 100%)">
 
-<div class="container bg-red-400 mx-auto px-24" style="background: linear-gradient(90deg, #ff4b4b 0%, #ed8787 100%)">
-
-  <h2 class="text-6xl font-bold mb-2 text-white pt-10">
-    Paste YouTube Link Below.
-  </h2>
-
-  <h3 class="text-2xl mb-8 text-gray-100 text-grey-800 ">
-      <div class="field">
-        <%= form.label :link %>
-        <%= form.text_field :link, id: :site_link %>
-      </div>
-  </h3>
-
-  <button>
-    <div class="actions bg-white font-bold rounded-full py-4 px-8 shadow-lg uppercase tracking-wider">
-      <%= form.submit %>
+    <div class="text-6xl font-bold mb-2 pt-10">
+      <p class="text-white"> Paste YouTube Link Below.</p>
     </div>
-  </button>
 
+    <h3 class="text-2xl mb-8 text-gray-100 text-grey-800 ">
+          <%= form.label :link %>
+          <%= form.text_field :link, id: :site_link, class:"text-grey-800" %>
+    </h3>
 
-</div>
+    <div>
+      <a class="bg-white rounded-full py-4 px-8 shadow-lg"  >
+        <%= form.submit class:"uppercase font-bold" %>
+      </a>
+    </div>
 
-  <br>
-  <br>
+  </div>
 
 <% end %>
 
