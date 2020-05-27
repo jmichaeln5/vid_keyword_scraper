@@ -84,11 +84,35 @@ class SitesController < ApplicationController
   # POST /sites
   # POST /sites.json
   def create
+    require 'rubygems'
+    require 'nokogiri'
+    require 'open-uri'
+    @user = current_user
     @site = Site.new(site_params)
     # @site = current_user.sites.build(site_params)
 
     respond_to do |format|
       if @site.save
+
+        begin
+          if @site.link.exclude? ("http" || "youtube")
+              redirect_to error_path and return
+          end
+
+          @html_doc = Nokogiri::HTML(open(@site.link))
+          @official_title = @html_doc.at_css("title").text
+
+          @video_id = @site.link.delete_prefix('https://www.youtube.com/watch?v=')
+
+          @thumbnail_link = "https://img.youtube.com/vi/#{@video_id}/0.jpg"
+
+          @keyword_list = @html_doc.at('meta[name="keywords"]').values[1]
+          ### Rescues from OpenURI HTTPError(s)
+          rescue OpenURI::HTTPError
+
+          redirect_to error_path and return
+        end
+
         # format.html { redirect_to @site, notice: 'Site was successfully created.' }
         format.html { redirect_to sites_path, notice: 'Site was successfully created.' }
         format.json { render :show, status: :created, location: @site }
@@ -132,6 +156,6 @@ class SitesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def site_params
-      params.require(:site).permit(:link, :title, :keyword, :user_id)
+      params.require(:site).permit(:link, :title, :thumbnail_link, :keyword_list, :user_id)
     end
 end

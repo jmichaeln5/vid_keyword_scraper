@@ -18,7 +18,8 @@ ActiveRecord::Schema.define(version: 2020_05_10_054557) do
   create_table "sites", force: :cascade do |t|
     t.string "link"
     t.string "title"
-    t.string "keyword"
+    t.string "thumbnail_link"
+    t.text "keyword_list"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

@@ -1,16 +1,15 @@
+<br>
 <div class="container bg-red-400 mx-auto px-24 rounded-lg" style="background: linear-gradient(90deg, #ff4b4b 0%, #ed8787 100%)">
-
   <h2 class="text-6xl font-bold mb-2 text-gray-100 pt-10">
     My Videos.
   </h2>
   <h3 class="text-2xl mb-8 text-gray-100">
     Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid corporis fuga, sit, animi consequuntur nesciunt. Non fuga quae, laboriosam explicabo?
   </h3>
-
+  <br>
   <button class="">
     <%= link_to 'Add Video', new_site_path, class:"bg-white font-bold rounded-full py-4 px-8 shadow-lg uppercase tracking-wider transition duration-500 ease-in-out" %>
   </button>
-
 </div>
 
 <div class="container my-12 mx-auto px-4 md:px-12">
@@ -32,13 +31,13 @@
                     <img src="<%= @thumbnail_link %>" alt="">
                   </div>
 
-                    <header class="flex items-center justify-between leading-tight p-2 md:p-4">
+                    <header class="flex items-center leading-tight p-2 md:p-4">
                         <h1 class="text-lg">
-                              <div class="hover:underline">
-                                  <a href="<%= site.link %>" target="_blank">
-                                    <%= "#{@official_title}"%>
-                                  </a>
-                              </div>
+                          <div class="hover:underline">
+                              <a href="<%= site.link %>" target="_blank">
+                                <%= "#{@official_title}"%>
+                              </a>
+                          </div>
                         </h1>
                     </header>
                     <div class="p-2">
@@ -47,9 +46,18 @@
                     </div>
                     <footer class="flex items-center justify-between leading-none p-2 md:p-4">
                       <div class="flex ">
+
+                        <!-- <button class="bg-green-400 hover:bg-green-700 text-white text-sm p-2 rounded">
+                          <%= link_to 'View', site_path(site), class:"hover:underline" %>
+                        </button>
+                        <button class="bg-grey-900 hover:bg-grey-700 text-sm p-2 rounded">
+                          <%= link_to 'Edit', edit_site_path(site), class:"hover:underline" %>
+                        </button> -->
+
                         <button class="bg-red-400 hover:bg-red-700 text-white text-sm p-2 rounded">
                           <%= link_to 'Delete', site, method: :delete, data: { confirm: 'Are you sure?' }, class:"hover:underline" %>
                         </button>
+
                       </div>
 
                     </footer>

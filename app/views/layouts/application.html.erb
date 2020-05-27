@@ -12,29 +12,34 @@
 
     <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
 
-   <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css">
-   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js">
-   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.bundle.min.js">
+    <!--import bootstrap -->
+    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"> -->
 
-   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script> -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.6/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script> -->
+    <!--  -->
   </head>
 
   <body class="bg-red-100">
 
     <%= render "layouts/nav" %>
 
-    <div class="bg-white container mx-auto px-20 pt-20 text-gray-850 text-base mt-12  rounded-lg">
+    <div class="bg-white container mx-auto text-gray-850 text-base mt-12  rounded-lg">
+      <br>
+      <br>
+      <br>
+      <div class="px-20">
 
-      <div class="mb-12 h-screen">
+        <div class="mb-12 h-screen">
+        <p class="text-green-600 transition duration-500 ease-out"><%= notice %></p>
+        <p class="text-red-600"><%= alert %></p>
 
-      <p class="text-green-600 transition duration-500 ease-out"><%= notice %></p>
-      <p class="text-red-600"><%= alert %></p>
-
-      <%= yield %>
-
+        <%= yield %>
+        </div>
+      </div>
     </div>
-  </div>
 
   </body>
 </html>
