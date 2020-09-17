@@ -1,20 +1,45 @@
-<br>
-<div class="container bg-red-400 mx-auto px-24 rounded-lg" style="background: linear-gradient(90deg, #ff4b4b 0%, #ed8787 100%)">
-  <h2 class="text-6xl font-bold mb-2 text-gray-100 pt-10">
+
+<!-- Mobile Header -->
+<div class="container bg-red-400 mx-auto px-4 rounded-lg display-on-mobile" style="background: linear-gradient(90deg, #ff4b4b 0%, #ed8787 100%)">
+  <h2 class="text-4xl font-bold mb-2 text-gray-100 pt-10 ">
     My Videos.
   </h2>
-  <h3 class="text-2xl mb-8 text-gray-100">
-    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid corporis fuga, sit, animi consequuntur nesciunt. Non fuga quae, laboriosam explicabo?
+  <h3 class="text-xl mb-8 text-gray-100 ">
+    Here is your collection of videos and their keywords. Click the button below and paste in the link to the Youtube video that you want the keywords to see how the pros engage!
   </h3>
   <br>
-  <button class="">
+  <button>
     <%= link_to 'Add Video', new_site_path, class:"bg-white font-bold rounded-full py-4 px-8 shadow-lg uppercase tracking-wider transition duration-500 ease-in-out" %>
   </button>
 </div>
 
+
+<!-- Desktop Header -->
+<div class="container bg-red-400 mx-auto px-24 rounded-lg display-on-desktop" style="background: linear-gradient(90deg, #ff4b4b 0%, #ed8787 100%)">
+  <h2 class="text-6xl font-bold mb-2 text-gray-100 pt-10">
+    My Videos.
+  </h2>
+  <h3 class="text-2xl mb-8 text-gray-100">
+    Here is your collection of videos and their keywords. Click the button below and paste in the link to the Youtube video that you want the keywords to see how the pros engage!
+  </h3>
+  <br>
+  <button>
+    <%= link_to 'Add Video', new_site_path, class:"bg-white font-bold rounded-full py-4 px-8 shadow-lg uppercase tracking-wider transition duration-500 ease-in-out" %>
+  </button>
+</div>
+
+
 <div class="container my-12 mx-auto px-4 md:px-12">
     <div class="flex items-center justify-center">
+
+
+
       <div class="flex flex-wrap -mx-1 lg:-mx-4">
+
+        <!-- Loop to scrape videos  -->
+        <!-- Loop to scrape videos  -->
+        <!-- Loop to scrape videos  -->
+        <!-- Loop to scrape videos  -->
 
         <% @sites.each do |site| %>
 
@@ -65,7 +90,16 @@
                 </article>
             </div>
         <% end %>
+        <!-- Loop to scrape videos  -->
+        <!-- Loop to scrape videos  -->
+        <!-- Loop to scrape videos  -->
+        <!-- Loop to scrape videos  -->
+
+
 
       </div>
+
+
+
     </div>
 </div>

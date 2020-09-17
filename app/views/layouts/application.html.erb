@@ -22,24 +22,29 @@
     <!--  -->
   </head>
 
-  <body class="bg-red-100">
-
+  <body class="bg-red-200 pb-5">
     <%= render "layouts/nav" %>
+    <div class="bg-white container mx-auto text-gray-850 text-base pt-16 rounded-lg pb-1">
 
-    <div class="bg-white container mx-auto text-gray-850 text-base mt-12  rounded-lg">
-      <br>
-      <br>
-      <br>
-      <div class="px-20">
+      <div class="mx-auto">
+<!-- Mobile View -->
+        <div class="display-on-mobile mx-2">
+          <div class="p-4">
 
-        <div class="mb-12 h-screen">
-        <p class="text-green-600 transition duration-500 ease-out"><%= notice %></p>
-        <p class="text-red-600"><%= alert %></p>
-
-        <%= yield %>
+            <p class="text-green-600 transition duration-500 ease-out"><%= notice %></p>
+            <p class="text-red-600 transition duration-500 ease-out"><%= alert %></p>
+            <%= yield %>
+          </div>
         </div>
-      </div>
-    </div>
+<!-- Desktop View  -->
+        <div class="display-on-desktop mx-20 my-10">
+          <p class="text-green-600 transition duration-500 ease-out"><%= notice %></p>
+          <p class="text-red-600 transition duration-500 ease-out"><%= alert %></p>
+          <%= yield %>
+        </div>
 
+      </div>
+
+    </div>
   </body>
 </html>
